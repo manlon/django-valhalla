@@ -22,3 +22,8 @@ class Deed(models.Model):
 
     class Meta:
         ordering = ['deed_date']
+
+class DeedIndexer(djapian.Indexer):
+    fields=["text"]
+
+djapian.add_index(Deed, DeedIndexer, attach_as="indexer")
