@@ -4,6 +4,7 @@ from django.contrib.auth import models as auth_models
 from django.db import models
 
 import dispatch
+import djapian
 
 
 class Deed(models.Model):
@@ -32,4 +33,5 @@ class Deed(models.Model):
 class DeedIndexer(djapian.Indexer):
     fields=["text"]
 
-djapian.add_index(Deed, DeedIndexer, attach_as="indexer")
+if not hasattr(Deed, 'indexer'):
+  djapian.add_index(Deed, DeedIndexer, attach_as="indexer")
