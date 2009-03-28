@@ -30,8 +30,10 @@ class Deed(models.Model):
         if dispatch_list: 
             for d in dispatch_list:
                 dispatch.dispatch_to(d, self.text)
+
 class DeedIndexer(djapian.Indexer):
     fields=["text"]
 
 if not hasattr(Deed, 'indexer'):
   djapian.add_index(Deed, DeedIndexer, attach_as="indexer")
+
